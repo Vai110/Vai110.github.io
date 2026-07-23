@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav R — Embedded Systems Engineer</title>
+<style>
+  :root{
+    --bg:#0A1420;
+    --panel:#101E2E;
+    --panel-2:#152840;
+    --amber:#FFB020;
+    --cyan:#4FD1C5;
+    --text:#E8EDF2;
+    --muted:#7C8B9A;
+    --line: rgba(232,237,242,0.08);
+    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+    --sans: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height:1.6;
+  }
+  a{ color: var(--amber); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  ::selection{ background: var(--amber); color: #1a1200; }
+
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- NAV ---- */
+  nav{
+    position: sticky; top:0; z-index: 10;
+    background: rgba(10,20,32,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content: space-between; padding: 14px 24px; }
+  .brand{ font-family: var(--mono); font-weight:700; color: var(--text); font-size: 14px; letter-spacing: 0.5px; }
+  .brand span{ color: var(--amber); }
+  .navlinks{ display:flex; gap: 20px; font-family: var(--mono); font-size: 13px; }
+  .navlinks a{ color: var(--muted); }
+  .navlinks a:hover{ color: var(--amber); text-decoration:none; }
+
+  /* ---- HERO / BOOT LOG ---- */
+  .hero{ padding: 90px 0 70px; }
+  .term{
+    background: #060C14;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px 24px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: #8FE0A8;
+    white-space: pre-wrap;
+    min-height: 220px;
+  }
+  .term .dim{ color: var(--muted); }
+  .term .hl{ color: var(--amber); }
+  .cursor{ display:inline-block; width:8px; height:14px; background: var(--amber); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-title{
+    font-family: var(--mono);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    margin: 28px 0 6px;
+    letter-spacing: -0.5px;
+  }
+  .hero-sub{ color: var(--muted); font-size: 17px; max-width: 560px; }
+  .hero-cta{ display:flex; gap:14px; margin-top: 26px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono); font-size: 13px; padding: 10px 18px;
+    border: 1px solid var(--line); border-radius: 6px; color: var(--text);
+  }
+  .btn:hover{ border-color: var(--amber); text-decoration:none; color: var(--amber); }
+  .btn.primary{ background: var(--amber); color:#1a1200; border-color: var(--amber); font-weight:700; }
+  .btn.primary:hover{ color:#1a1200; opacity:0.9; }
+
+  /* ---- SECTION LABELS (memory-map motif) ---- */
+  section{ padding: 60px 0; border-top: 1px solid var(--line); }
+  .addr{
+    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
+    letter-spacing: 1px; margin-bottom: 8px; display:block;
+  }
+  h2.stitle{ font-family: var(--mono); font-size: 22px; margin: 0 0 22px; font-weight:700; }
+
+  /* ---- ABOUT ---- */
+  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width:640px){ .about-grid{ grid-template-columns:1fr; } }
+  .stat{ font-family: var(--mono); }
+  .stat .num{ font-size: 26px; color: var(--cyan); font-weight:700; }
+  .stat .lbl{ font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-row{ display:flex; gap: 32px; margin-top: 20px; }
+
+  /* ---- SKILLS ---- */
+  .skill-group{ margin-bottom: 22px; }
+  .skill-group h3{ font-family: var(--mono); font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 10px; font-weight: 500; }
+  .chips{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .chip{
+    font-family: var(--mono); font-size: 12.5px; padding: 6px 12px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--text);
+  }
+
+  /* ---- PROJECT CARDS ---- */
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px;
+    margin-bottom: 22px;
+    transition: border-color 0.15s ease;
+  }
+  .card:hover{ border-color: var(--cyan); }
+  .card-top{ display:flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .card h3{ font-size: 18px; margin: 0 0 8px; font-family: var(--sans); font-weight: 700; }
+  .card p.desc{ color: var(--muted); font-size: 14.5px; margin: 0 0 16px; }
+  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom: 16px; }
+  .tag{ font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 4px; background: var(--panel-2); color: var(--cyan); }
+  .metrics{ display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 10px; margin: 16px 0; }
+  .metric{ background: var(--panel-2); border-radius: 6px; padding: 10px 12px; }
+  .metric .v{ font-family: var(--mono); color: var(--amber); font-size: 16px; font-weight:700; }
+  .metric .k{ font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .card-links{ display:flex; gap: 16px; font-family: var(--mono); font-size: 13px; margin-top: 4px; }
+
+  /* ---- CONTACT ---- */
+  .contact-row{ display:flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  footer{ padding: 40px 0 60px; color: var(--muted); font-size: 13px; font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">VAIBHAV<span>_R</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero wrap">
+  <div class="term" id="bootlog"></div>
+  <h1 class="hero-title">Vaibhav R</h1>
+  <p class="hero-sub">Electronics &amp; Communication Engineering student building real-time embedded systems — ARM Cortex-M, RISC-V, FreeRTOS, and the VLSI flow underneath them.</p>
+  <div class="hero-cta">
+    <a class="btn primary" href="#projects">View projects</a>
+    <a class="btn" href="RESUME_LINK_HERE">Download resume</a>
+    <a class="btn" href="https://github.com/YOUR_USERNAME">GitHub ↗</a>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <span class="addr">0x00 — ABOUT</span>
+    <h2 class="stitle">register dump</h2>
+    <div class="about-grid">
+      <div>
+        <p>Electronics and Communication Engineering student with hands-on project experience across embedded systems, sensor interfacing, machine learning, and computer vision. Completed an internship at HAL's Mission and Combat Systems R&amp;D Centre studying defense-grade embedded architectures.</p>
+        <p>Currently deep in a self-directed program porting a real-time FreeRTOS system from ARM Cortex-M to RISC-V — measuring, not assuming, what actually changes underneath an RTOS when the ISA changes.</p>
+      </div>
+      <div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">9.23</div><div class="lbl">CGPA</div></div>
+          <div class="stat"><div class="num">2027</div><div class="lbl">Grad Year</div></div>
+        </div>
+        <div class="stat-row" style="margin-top:24px;">
+          <div class="stat"><div class="num">2</div><div class="lbl">Core Architectures</div></div>
+          <div class="stat"><div class="num">HAL</div><div class="lbl">Internship</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="addr">0x01 — SKILLS</span>
+    <h2 class="stitle">loaded modules</h2>
+
+    <div class="skill-group">
+      <h3>Embedded &amp; RTOS</h3>
+      <div class="chips">
+        <span class="chip">ARM Cortex-M</span>
+        <span class="chip">RISC-V (RV32IMC)</span>
+        <span class="chip">FreeRTOS</span>
+        <span class="chip">Embedded C</span>
+        <span class="chip">Register-level programming</span>
+        <span class="chip">Interrupt design (NVIC / ECLIC)</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>VLSI / Digital Design</h3>
+      <div class="chips">
+        <span class="chip">RTL-to-GDS flow</span>
+        <span class="chip">Logic synthesis concepts</span>
+        <span class="chip">Quartus / FPGA prototyping</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Machine Learning &amp; CV</h3>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">OpenCV / DeepFace</span>
+        <span class="chip">Random Forest / classification</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Tools</h3>
+      <div class="chips">
+        <span class="chip">STM32CubeIDE</span>
+        <span class="chip">Proteus</span>
+        <span class="chip">MATLAB</span>
+        <span class="chip">Git / GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <span class="addr">0x02 — PROJECTS</span>
+    <h2 class="stitle">flashed images</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Real-Time Multi-Sensor Monitoring System</h3>
+      </div>
+      <p class="desc">Register-level STM32 system reading an IMU and environmental sensor concurrently under FreeRTOS, with interrupt-driven fault handling and measured real-time behavior — no HAL abstraction.</p>
+      <div class="tag-row">
+        <span class="tag">STM32</span><span class="tag">FreeRTOS</span><span class="tag">I2C / UART</span><span class="tag">Cortex-M4</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="v">[X] Hz</div><div class="k">sample rate</div></div>
+        <div class="metric"><div class="v">[X] µs</div><div class="k">interrupt latency</div></div>
+        <div class="metric"><div class="v">0</div><div class="k">missed deadlines</div></div>
+      </div>
+      <div class="card-links">
+        <a href="PROJECT_A_REPO_URL">Repo ↗</a>
+        <a href="PROJECT_A_DEMO_URL">Demo ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>FreeRTOS Cross-Architecture Port — ARM vs RISC-V</h3>
+      </div>
+      <p class="desc">The same sensor system rebuilt task-for-task on a RISC-V microcontroller, isolating the ISA as the only variable to produce a measured comparison against the ARM baseline — not an assumed one.</p>
+      <div class="tag-row">
+        <span class="tag">RISC-V (RV32IMC)</span><span class="tag">GD32VF103</span><span class="tag">FreeRTOS</span><span class="tag">ECLIC</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="v">[X] µs</div><div class="k">ARM latency</div></div>
+        <div class="metric"><div class="v">[Y] µs</div><div class="k">RISC-V latency</div></div>
+        <div class="metric"><div class="v">[X]%</div><div class="k">smaller binary</div></div>
+      </div>
+      <div class="card-links">
+        <a href="PROJECT_B_REPO_URL">Repo ↗</a>
+        <a href="PROJECT_B_DEMO_URL">Demo ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="addr">0x03 — CONTACT</span>
+    <h2 class="stitle">open a connection</h2>
+    <p style="color:var(--muted);">Open to embedded systems, firmware, and VLSI-adjacent roles.</p>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:10c29vaibhav@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/YOUR_USERNAME">GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">built with register-level precision — last flashed <span id="year"></span></div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const lines = [
+    { t: "$ connecting to /dev/ttyUSB0 at 115200 baud...", cls:"dim" },
+    { t: "[BOOT] STM32F401RE :: Cortex-M4 :: clk=84MHz", cls:"" },
+    { t: "[BOOT] FreeRTOS kernel v10.x :: 3 tasks registered", cls:"" },
+    { t: "[BOOT] I2C1 :: MPU6050 :: WHO_AM_I = 0x68 :: OK", cls:"hl" },
+    { t: "[BOOT] loading profile :: VAIBHAV_R.elf", cls:"" },
+    { t: "[OK] identity confirmed :: ECE :: CGPA 9.23", cls:"hl" },
+    { t: "[OK] internship :: HAL / MCSRDC :: embedded systems", cls:"" },
+    { t: "[OK] ready.", cls:"hl" }
+  ];
+
+  const el = document.getElementById('bootlog');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    el.innerHTML = lines.map(l => `<div class="${l.cls}">${l.t}</div>`).join('');
+  }
+
+  if (reduceMotion) {
+    renderStatic();
+  } else {
+    let li = 0, ci = 0;
+    let html = "";
+    function typeNext(){
+      if (li >= lines.length) {
+        el.innerHTML = html + '<span class="cursor"></span>';
+        return;
+      }
+      const line = lines[li];
+      if (ci === 0) html += `<div class="${line.cls}">`;
+      if (ci < line.t.length) {
+        html += line.t[ci] === '<' ? '' : line.t[ci];
+        ci++;
+        el.innerHTML = html + `</div><span class="cursor"></span>`;
+        setTimeout(typeNext, 12);
+      } else {
+        html += "</div>";
+        li++; ci = 0;
+        setTimeout(typeNext, 120);
+      }
+    }
+    typeNext();
+  }
+</script>
+
+</body>
+</html>
