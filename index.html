@@ -7,22 +7,24 @@
 <!-- Modern Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg-main: #0B0F17;
-    --bg-card: #121824;
-    --bg-card-hover: #172030;
+    --bg-main: #070A0F;
+    --bg-card: rgba(18, 24, 38, 0.7);
+    --bg-card-hover: rgba(23, 32, 50, 0.95);
     --border-color: rgba(255, 255, 255, 0.08);
-    --border-accent: rgba(79, 209, 197, 0.3);
+    --border-accent: rgba(79, 209, 197, 0.4);
     
     --primary: #FFB020;
+    --primary-glow: rgba(255, 176, 32, 0.15);
     --secondary: #4FD1C5;
-    --text-main: #F1F5F9;
+    --secondary-glow: rgba(79, 209, 197, 0.15);
+    --text-main: #F8FAFC;
     --text-muted: #94A3B8;
     
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
 
@@ -35,13 +37,17 @@
     font-family: var(--font-sans);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(79, 209, 197, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(255, 176, 32, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 
   a { color: var(--primary); text-decoration: none; transition: all 0.2s; }
   a:hover { opacity: 0.85; }
 
   .container {
-    max-width: 900px;
+    max-width: 920px;
     margin: 0 auto;
     padding: 0 24px;
   }
@@ -51,8 +57,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(11, 15, 23, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(7, 10, 15, 0.85);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
   }
   nav .container {
@@ -83,25 +89,34 @@
 
   /* ---- HERO SECTION ---- */
   .hero {
-    padding: 100px 0 60px;
+    padding: 90px 0 60px;
   }
   .hero-tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--secondary);
-    background: rgba(79, 209, 197, 0.1);
+    background: var(--secondary-glow);
     padding: 6px 14px;
     border-radius: 20px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(79, 209, 197, 0.2);
+    margin-bottom: 24px;
+    border: 1px solid rgba(79, 209, 197, 0.25);
+  }
+  .hero-tag .dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--secondary);
   }
   .hero-title {
-    font-size: clamp(36px, 6vw, 52px);
+    font-size: clamp(38px, 6vw, 56px);
     font-weight: 800;
     line-height: 1.15;
-    margin-bottom: 16px;
-    letter-spacing: -1px;
+    margin-bottom: 18px;
+    letter-spacing: -1.5px;
   }
   .hero-title span {
     background: linear-gradient(135deg, var(--primary) 0%, #FFD070 100%);
@@ -111,9 +126,9 @@
   .hero-sub {
     font-size: 18px;
     color: var(--text-muted);
-    max-width: 650px;
+    max-width: 680px;
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
   }
   .hero-cta {
     display: flex;
@@ -132,24 +147,25 @@
     align-items: center;
     gap: 8px;
     border: 1px solid var(--border-color);
-    background: var(--bg-card);
+    background: rgba(18, 24, 38, 0.8);
     color: var(--text-main);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
   }
   .btn:hover {
     border-color: var(--primary);
     color: var(--primary);
     transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--primary-glow);
   }
   .btn.primary {
     background: var(--primary);
-    color: #0B0F17;
+    color: #070A0F;
     border-color: var(--primary);
   }
   .btn.primary:hover {
     background: #e59d1a;
-    color: #0B0F17;
+    color: #070A0F;
   }
 
   /* ---- SECTIONS ---- */
@@ -191,7 +207,8 @@
   .stats-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -217,7 +234,7 @@
     gap: 24px;
   }
   .skill-category h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-family: var(--font-mono);
     color: var(--text-muted);
     text-transform: uppercase;
@@ -248,7 +265,8 @@
   .project-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
     padding: 28px;
     transition: all 0.25s ease;
   }
@@ -256,12 +274,44 @@
     border-color: var(--border-accent);
     background: var(--bg-card-hover);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
   }
   .project-card h3 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 10px;
     color: var(--text-main);
+  }
+  .status-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .status-active {
+    background: rgba(255, 176, 32, 0.15);
+    color: var(--primary);
+    border: 1px solid rgba(255, 176, 32, 0.3);
+  }
+  .status-upcoming {
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--text-muted);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+  .status-completed {
+    background: rgba(79, 209, 197, 0.15);
+    color: var(--secondary);
+    border: 1px solid rgba(79, 209, 197, 0.3);
   }
   .project-card p {
     color: var(--text-muted);
@@ -279,8 +329,18 @@
     font-size: 12px;
     padding: 4px 10px;
     border-radius: 6px;
-    background: rgba(79, 209, 197, 0.1);
+    background: rgba(79, 209, 197, 0.08);
     color: var(--secondary);
+  }
+  .project-links {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+  }
+  .project-links a {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--primary);
   }
 
   /* ---- FOOTER ---- */
@@ -308,7 +368,9 @@
 </nav>
 
 <div class="container hero">
-  <span class="hero-tag">ECE Undergraduate</span>
+  <div class="hero-tag">
+    <span class="dot"></span> ECE Undergraduate &amp; Embedded Engineer
+  </div>
   <h1 class="hero-title">Hi, I'm <span>Vaibhav R</span></h1>
   <p class="hero-sub">Electronics and Communication Engineering student specializing in embedded systems, sensor interfacing, machine learning, and computer vision with foundational exposure to digital design workflows.</p>
   <div class="hero-cta">
@@ -324,7 +386,7 @@
     <div class="about-grid">
       <div class="about-text">
         <p>I am an Electronics and Communication Engineering student at New Horizon College of Engineering with strong analytical skills and hands-on experience across embedded microcontrollers, machine learning models, and computer vision.</p>
-        <p>I completed an engineering internship at HAL's Mission and Combat Systems R&D Centre (MCSRDC), where I studied defense-grade embedded processing platforms (STM32 and LPC microcontrollers) alongside system validation and engineering documentation practices.</p>
+        <p>I completed an engineering internship at HAL's Mission and Combat Systems R&amp;D Centre (MCSRDC), where I studied defense-grade embedded processing platforms (STM32 and LPC microcontrollers) alongside system validation and engineering documentation practices.</p>
       </div>
       <div class="stats-card">
         <div class="stat-item">
@@ -349,7 +411,7 @@
     <h2 class="section-title">Technical Skills</h2>
     <div class="skills-wrapper">
       <div class="skill-category">
-        <h3>Embedded Systems & Hardware</h3>
+        <h3>Embedded Systems &amp; Hardware</h3>
         <div class="chips">
           <span class="chip">STM32 Microcontrollers</span>
           <span class="chip">LPC Microcontrollers</span>
@@ -361,7 +423,7 @@
       </div>
 
       <div class="skill-category">
-        <h3>VLSI & Digital Design</h3>
+        <h3>VLSI &amp; Digital Design</h3>
         <div class="chips">
           <span class="chip">RTL-to-GDS Flow</span>
           <span class="chip">Logic Synthesis Concepts</span>
@@ -371,7 +433,7 @@
       </div>
 
       <div class="skill-category">
-        <h3>Software & Machine Learning</h3>
+        <h3>Software &amp; Machine Learning</h3>
         <div class="chips">
           <span class="chip">Python</span>
           <span class="chip">C</span>
@@ -391,8 +453,12 @@
     <h2 class="section-title">Featured Projects</h2>
     <div class="project-list">
       
+      <!-- Current Major Project -->
       <div class="project-card">
-        <h3>AI-Enabled Modular Multimodal Electronic Skin System</h3>
+        <div class="project-header">
+          <h3>AI-Enabled Modular Multimodal Electronic Skin System</h3>
+          <span class="status-badge status-active">Active Development</span>
+        </div>
         <p>Designing a multimodal sensing architecture combining intelligent sensing and Edge AI pipelines for real-time robotic safety and structural health anomaly detection.</p>
         <div class="tag-row">
           <span class="tag">Edge AI</span>
@@ -402,8 +468,48 @@
         </div>
       </div>
 
+      <!-- Upcoming RTOS Project A -->
       <div class="project-card">
-        <h3>Medical Facial Recognition System</h3>
+        <div class="project-header">
+          <h3>Real-Time Multi-Sensor Monitoring System (STM32 + FreeRTOS)</h3>
+          <span class="status-badge status-upcoming">Upcoming Project</span>
+        </div>
+        <p>Register-level real-time system designed to sample multi-axis sensor data under a preemptive FreeRTOS scheduler, featuring interrupt-driven fault handling, mutex-guarded UART output, and direct task notifications.</p>
+        <div class="tag-row">
+          <span class="tag">STM32</span>
+          <span class="tag">FreeRTOS</span>
+          <span class="tag">Embedded C</span>
+          <span class="tag">Register-Level</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Vai110/stm32-freertos-sensor-monitor" target="_blank">View Repo ↗</a>
+        </div>
+      </div>
+
+      <!-- Upcoming RTOS Project B -->
+      <div class="project-card">
+        <div class="project-header">
+          <h3>FreeRTOS Cross-Architecture Port — ARM vs RISC-V</h3>
+          <span class="status-badge status-upcoming">Upcoming Project</span>
+        </div>
+        <p>A comparative architectural project porting the FreeRTOS multi-sensor system to a RISC-V microcontroller to empirically benchmark interrupt latency, context-switching overhead, and instruction density against ARM Cortex-M.</p>
+        <div class="tag-row">
+          <span class="tag">RISC-V (RV32IMC)</span>
+          <span class="tag">ARM Cortex-M4</span>
+          <span class="tag">FreeRTOS Porting</span>
+          <span class="tag">ECLIC / NVIC</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Vai110/freertos-arm-vs-riscv-port" target="_blank">View Repo ↗</a>
+        </div>
+      </div>
+
+      <!-- Completed Project 1 -->
+      <div class="project-card">
+        <div class="project-header">
+          <h3>Medical Facial Recognition System</h3>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
         <p>Developed a real-time facial recognition application using OpenCV and DeepFace, implementing custom image processing workflows, face alignment, and identity matching mechanisms.</p>
         <div class="tag-row">
           <span class="tag">Python</span>
@@ -413,8 +519,12 @@
         </div>
       </div>
 
+      <!-- Completed Project 2 -->
       <div class="project-card">
-        <h3>Category Identification via Machine Learning</h3>
+        <div class="project-header">
+          <h3>Category Identification via Machine Learning</h3>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
         <p>Built an automated classification and recommendation system utilizing the Random Forest algorithm, incorporating end-to-end data preprocessing, model validation, and evaluation.</p>
         <div class="tag-row">
           <span class="tag">Python</span>
