@@ -4,128 +4,313 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vaibhav R — Embedded Systems & ECE Portfolio</title>
+<!-- Modern Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0A1420;
-    --panel:#101E2E;
-    --panel-2:#152840;
-    --amber:#FFB020;
-    --cyan:#4FD1C5;
-    --text:#E8EDF2;
-    --muted:#7C8B9A;
-    --line: rgba(232,237,242,0.08);
-    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
-    --sans: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  :root {
+    --bg-main: #0B0F17;
+    --bg-card: #121824;
+    --bg-card-hover: #172030;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(79, 209, 197, 0.3);
+    
+    --primary: #FFB020;
+    --secondary: #4FD1C5;
+    --text-main: #F1F5F9;
+    --text-muted: #94A3B8;
+    
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-  body{
-    margin:0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    line-height:1.6;
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  a{ color: var(--amber); text-decoration: none; }
-  a:hover{ text-decoration: underline; }
-  ::selection{ background: var(--amber); color: #1a1200; }
 
-  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--primary); text-decoration: none; transition: all 0.2s; }
+  a:hover { opacity: 0.85; }
 
-  /* ---- NAV ---- */
-  nav{
-    position: sticky; top:0; z-index: 10;
-    background: rgba(10,20,32,0.9);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
   }
-  nav .wrap{ display:flex; align-items:center; justify-content: space-between; padding: 14px 24px; }
-  .brand{ font-family: var(--mono); font-weight:700; color: var(--text); font-size: 14px; letter-spacing: 0.5px; }
-  .brand span{ color: var(--amber); }
-  .navlinks{ display:flex; gap: 20px; font-family: var(--mono); font-size: 13px; }
-  .navlinks a{ color: var(--muted); }
-  .navlinks a:hover{ color: var(--amber); text-decoration:none; }
 
-  /* ---- HERO ---- */
-  .hero{ padding: 80px 0 60px; }
-  .hero-title{
-    font-family: var(--sans);
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 800;
-    margin: 0 0 10px;
+  /* ---- NAVIGATION ---- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 15, 23, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+  }
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  .brand {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 16px;
     letter-spacing: -0.5px;
+    color: var(--text-main);
   }
-  .hero-title span { color: var(--amber); }
-  .hero-sub{ color: var(--muted); font-size: 17px; max-width: 620px; line-height: 1.6; }
-  .hero-cta{ display:flex; gap:14px; margin-top: 26px; flex-wrap: wrap; }
-  .btn{
-    font-family: var(--mono); font-size: 13px; padding: 10px 18px;
-    border: 1px solid var(--line); border-radius: 6px; color: var(--text);
+  .brand span { color: var(--primary); }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--primary); }
+
+  /* ---- HERO SECTION ---- */
+  .hero {
+    padding: 100px 0 60px;
+  }
+  .hero-tag {
     display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--secondary);
+    background: rgba(79, 209, 197, 0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(79, 209, 197, 0.2);
   }
-  .btn:hover{ border-color: var(--amber); text-decoration:none; color: var(--amber); }
-  .btn.primary{ background: var(--amber); color:#1a1200; border-color: var(--amber); font-weight:700; }
-  .btn.primary:hover{ color:#1a1200; opacity:0.9; }
+  .hero-title {
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--primary) 0%, #FFD070 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 650px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* ---- BUTTONS ---- */
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+  .btn.primary {
+    background: var(--primary);
+    color: #0B0F17;
+    border-color: var(--primary);
+  }
+  .btn.primary:hover {
+    background: #e59d1a;
+    color: #0B0F17;
+  }
 
   /* ---- SECTIONS ---- */
-  section{ padding: 50px 0; border-top: 1px solid var(--line); }
-  h2.stitle{ font-family: var(--mono); font-size: 22px; margin: 0 0 22px; font-weight:700; color: var(--amber); }
+  section {
+    padding: 70px 0;
+    border-top: 1px solid var(--border-color);
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: var(--border-color);
+  }
 
   /* ---- ABOUT ---- */
-  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  @media (max-width:640px){ .about-grid{ grid-template-columns:1fr; } }
-  .stat{ font-family: var(--mono); }
-  .stat .num{ font-size: 26px; color: var(--cyan); font-weight:700; }
-  .stat .lbl{ font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .stat-row{ display:flex; gap: 32px; margin-top: 20px; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
+  }
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  .about-text p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .stats-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .stat-item .num {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--secondary);
+  }
+  .stat-item .lbl {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
   /* ---- SKILLS ---- */
-  .skill-group{ margin-bottom: 22px; }
-  .skill-group h3{ font-family: var(--mono); font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 10px; font-weight: 500; }
-  .chips{ display:flex; flex-wrap:wrap; gap: 8px; }
-  .chip{
-    font-family: var(--mono); font-size: 12.5px; padding: 6px 12px;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--text);
+  .skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .skill-category h3 {
+    font-size: 14px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
   }
 
-  /* ---- PROJECT CARDS ---- */
-  .card{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 24px;
+  /* ---- PROJECTS ---- */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.25s ease;
+  }
+  .project-card:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+  .project-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-main);
+  }
+  .project-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
     margin-bottom: 20px;
-    transition: border-color 0.15s ease;
   }
-  .card:hover{ border-color: var(--cyan); }
-  .card h3{ font-size: 18px; margin: 0 0 8px; font-family: var(--sans); font-weight: 700; color: var(--text); }
-  .card p.desc{ color: var(--muted); font-size: 14.5px; margin: 0 0 16px; }
-  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom: 12px; }
-  .tag{ font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 4px; background: var(--panel-2); color: var(--cyan); }
-  .card-links{ display:flex; gap: 16px; font-family: var(--mono); font-size: 13px; margin-top: 12px; }
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(79, 209, 197, 0.1);
+    color: var(--secondary);
+  }
 
-  /* ---- CONTACT ---- */
-  .contact-row{ display:flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
-  footer{ padding: 40px 0 60px; color: var(--muted); font-size: 13px; font-family: var(--mono); }
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="wrap">
+  <div class="container">
     <div class="brand">VAIBHAV<span>_R</span></div>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
 </nav>
 
-<div class="hero wrap">
+<div class="container hero">
+  <span class="hero-tag">ECE Undergraduate</span>
   <h1 class="hero-title">Hi, I'm <span>Vaibhav R</span></h1>
-  <p class="hero-sub">Electronics &amp; Communication Engineering student specializing in embedded systems, sensor interfacing, machine learning, and computer vision with foundational exposure to digital design flows.</p>
+  <p class="hero-sub">Electronics and Communication Engineering student specializing in embedded systems, sensor interfacing, machine learning, and computer vision with foundational exposure to digital design workflows.</p>
   <div class="hero-cta">
     <a class="btn primary" href="#projects">View Projects</a>
     <a class="btn" href="Vaibhav_R_Resume.pdf" target="_blank" download>Download Resume ↗</a>
@@ -134,21 +319,25 @@
 </div>
 
 <section id="about">
-  <div class="wrap">
-    <h2 class="stitle">About Me</h2>
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
     <div class="about-grid">
-      <div>
-        <p>Electronics and Communication Engineering student at New Horizon College of Engineering with strong analytical skills and hands-on project experience across embedded microcontrollers, AI model deployment, and computer vision.</p>
-        <p>Completed an internship at HAL's Mission and Combat Systems R&amp;D Centre (MCSRDC) studying defense-grade embedded platforms including STM32 and LPC microcontrollers alongside engineering validation workflows.</p>
+      <div class="about-text">
+        <p>I am an Electronics and Communication Engineering student at New Horizon College of Engineering with strong analytical skills and hands-on experience across embedded microcontrollers, machine learning models, and computer vision.</p>
+        <p>I completed an engineering internship at HAL's Mission and Combat Systems R&D Centre (MCSRDC), where I studied defense-grade embedded processing platforms (STM32 and LPC microcontrollers) alongside system validation and engineering documentation practices.</p>
       </div>
-      <div>
-        <div class="stat-row">
-          <div class="stat"><div class="num">9.23</div><div class="lbl">CGPA</div></div>
-          <div class="stat"><div class="num">2027</div><div class="lbl">Grad Year</div></div>
+      <div class="stats-card">
+        <div class="stat-item">
+          <div class="num">9.23</div>
+          <div class="lbl">Academic CGPA</div>
         </div>
-        <div class="stat-row" style="margin-top:24px;">
-          <div class="stat"><div class="num">HAL</div><div class="lbl">MCSRDC Intern</div></div>
-          <div class="stat"><div class="num">NPTEL</div><div class="lbl">RTL to GDS Flow</div></div>
+        <div class="stat-item">
+          <div class="num">2027</div>
+          <div class="lbl">Expected Graduation</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">HAL</div>
+          <div class="lbl">MCSRDC Internship</div>
         </div>
       </div>
     </div>
@@ -156,81 +345,94 @@
 </section>
 
 <section id="skills">
-  <div class="wrap">
-    <h2 class="stitle">Technical Skills</h2>
-
-    <div class="skill-group">
-      <h3>Embedded &amp; Hardware</h3>
-      <div class="chips">
-        <span class="chip">STM32 Microcontrollers</span>
-        <span class="chip">LPC Microcontrollers</span>
-        <span class="chip">Embedded C</span>
-        <span class="chip">Sensor Interfacing</span>
-        <span class="chip">UART / SPI / I2C</span>
-        <span class="chip">FSM Design</span>
+  <div class="container">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-wrapper">
+      <div class="skill-category">
+        <h3>Embedded Systems & Hardware</h3>
+        <div class="chips">
+          <span class="chip">STM32 Microcontrollers</span>
+          <span class="chip">LPC Microcontrollers</span>
+          <span class="chip">Embedded C</span>
+          <span class="chip">Sensor Interfacing</span>
+          <span class="chip">UART / SPI / I2C</span>
+          <span class="chip">FSM Design</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-group">
-      <h3>VLSI &amp; Digital Design</h3>
-      <div class="chips">
-        <span class="chip">RTL-to-GDS Flow</span>
-        <span class="chip">Logic Synthesis Concepts</span>
-        <span class="chip">Quartus / FPGA Prototyping</span>
-        <span class="chip">Proteus Simulation</span>
+      <div class="skill-category">
+        <h3>VLSI & Digital Design</h3>
+        <div class="chips">
+          <span class="chip">RTL-to-GDS Flow</span>
+          <span class="chip">Logic Synthesis Concepts</span>
+          <span class="chip">Quartus / FPGA Prototyping</span>
+          <span class="chip">Proteus Simulation</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-group">
-      <h3>Software &amp; AI</h3>
-      <div class="chips">
-        <span class="chip">Python</span>
-        <span class="chip">C</span>
-        <span class="chip">Java</span>
-        <span class="chip">OpenCV</span>
-        <span class="chip">DeepFace</span>
-        <span class="chip">Random Forest / Classification</span>
-        <span class="chip">MATLAB</span>
+      <div class="skill-category">
+        <h3>Software & Machine Learning</h3>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">C</span>
+          <span class="chip">Java</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">DeepFace</span>
+          <span class="chip">Random Forest / Classification</span>
+          <span class="chip">MATLAB</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section id="projects">
-  <div class="wrap">
-    <h2 class="stitle">Featured Projects</h2>
-
-    <div class="card">
-      <h3>AI-Enabled Modular Multimodal Electronic Skin System</h3>
-      <p class="desc">Ongoing project designing a multimodal sensing architecture combining intelligent sensing and Edge AI pipelines for real-time robotic safety and structural health anomaly detection.</p>
-      <div class="tag-row">
-        <span class="tag">Edge AI</span><span class="tag">Sensors</span><span class="tag">Embedded Systems</span><span class="tag">Anomaly Detection</span>
+  <div class="container">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="project-list">
+      
+      <div class="project-card">
+        <h3>AI-Enabled Modular Multimodal Electronic Skin System</h3>
+        <p>Designing a multimodal sensing architecture combining intelligent sensing and Edge AI pipelines for real-time robotic safety and structural health anomaly detection.</p>
+        <div class="tag-row">
+          <span class="tag">Edge AI</span>
+          <span class="tag">Sensors</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Anomaly Detection</span>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3>Medical Facial Recognition System</h3>
-      <p class="desc">Developed a real-time facial recognition system using OpenCV and DeepFace, implementing custom image preprocessing pipelines, face alignment, and real-time identity verification.</p>
-      <div class="tag-row">
-        <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">DeepFace</span><span class="tag">Computer Vision</span>
+      <div class="project-card">
+        <h3>Medical Facial Recognition System</h3>
+        <p>Developed a real-time facial recognition application using OpenCV and DeepFace, implementing custom image processing workflows, face alignment, and identity matching mechanisms.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">DeepFace</span>
+          <span class="tag">Computer Vision</span>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3>Category Identification via Machine Learning</h3>
-      <p class="desc">Built an end-to-end data processing and automated classification pipeline utilizing the Random Forest algorithm for automated category prediction and recommendation.</p>
-      <div class="tag-row">
-        <span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Data Analytics</span>
+      <div class="project-card">
+        <h3>Category Identification via Machine Learning</h3>
+        <p>Built an automated classification and recommendation system utilizing the Random Forest algorithm, incorporating end-to-end data preprocessing, model validation, and evaluation.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Data Analytics</span>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="wrap">
-    <h2 class="stitle">Get In Touch</h2>
-    <p style="color:var(--muted);">Open to embedded systems, hardware engineering, and VLSI-adjacent roles.</p>
-    <div class="contact-row">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px;">Open to embedded systems, hardware engineering, and VLSI-adjacent roles.</p>
+    <div class="hero-cta">
       <a class="btn primary" href="mailto:10c29vaibhav@gmail.com">Email Me ↗</a>
       <a class="btn" href="https://github.com/Vai110" target="_blank">GitHub ↗</a>
       <a class="btn" href="https://www.linkedin.com/in/r-vaibhav-551239305" target="_blank">LinkedIn ↗</a>
@@ -239,7 +441,9 @@
 </section>
 
 <footer>
-  <div class="wrap">Vaibhav R — <span id="year"></span></div>
+  <div class="container">
+    Vaibhav R &copy; <span id="year"></span> — Portfolio
+  </div>
 </footer>
 
 <script>
